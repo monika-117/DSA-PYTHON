@@ -1,21 +1,21 @@
+# nums = [100,4,200,1,3,2]
 class Solution:
     def longestConsecutive(self, nums):
-        s = set(nums)      # Store all numbers in a set
+
+        s = set(nums)#{100,4,200,1,3,2}
         longest = 0
 
         for num in s:
 
-            # Check if this is the start of a sequence
+            # Check if it is the start of a sequence
             if num - 1 not in s:
 
-                current = num
-                count = 1
+                length = 1
 
-                # Count consecutive numbers
-                while current + 1 in s:
-                    current += 1
-                    count += 1
+                while num + 1 in s:
+                    num += 1
+                    length += 1
 
-                longest = max(longest, count)
+                longest = max(longest, length)
 
         return longest
