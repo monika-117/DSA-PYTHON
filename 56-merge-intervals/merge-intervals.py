@@ -1,11 +1,21 @@
+#Input: intervals = [[1,3],[2,6],[8,10],[15,18]]
+#Output: [[1,6],[8,10],[15,18]]
+
+
 class Solution:
-  def merge(self, intervals):
-    ans = []
+    def merge(self, intervals):
 
-    for interval in sorted(intervals):
-      if not ans or ans[-1][1] < interval[0]:
-        ans.append(interval)
-      else:
-        ans[-1][1] = max(ans[-1][1], interval[1])
+        intervals.sort(key=lambda x: x[0])
 
-    return ans
+        merged = []
+
+        for interval in intervals:
+
+            if not merged or merged[-1][1] < interval[0]:
+                merged.append(interval)
+
+            else:
+                merged[-1][1] = max(merged[-1][1], interval[1])
+
+        return merged
+        
