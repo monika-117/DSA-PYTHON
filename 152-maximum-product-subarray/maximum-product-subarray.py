@@ -1,20 +1,29 @@
 class Solution:
-  def maxProduct(self, nums):
-    ans = nums[0]
-    dpMin = nums[0]  # the minimum so far
-    dpMax = nums[0]  # the maximum so far
+    def maxProduct(self, nums):
 
-    for i in range(1, len(nums)):
-      num = nums[i]
-      prevMin = dpMin  # dpMin[i - 1]
-      prevMax = dpMax  # dpMax[i - 1]
-      if num < 0:
-        dpMin = min(prevMax * num, num)
-        dpMax = max(prevMin * num, num)
-      else:
-        dpMin = min(prevMin * num, num)
-        dpMax = max(prevMax * num, num)
+        maxProd = nums[0]
+        minProd = nums[0]
+        answer = nums[0]
 
-      ans = max(ans, dpMax)
+        for i in range(1, len(nums)):
 
-    return ans
+            current = nums[i]
+
+            # Store old values
+            oldMax = maxProd
+            oldMin = minProd
+
+            # Find new maximum product
+            maxProd = max(current,
+                          current * oldMax,
+                          current * oldMin)
+
+            # Find new minimum product
+            minProd = min(current,
+                          current * oldMax,
+                          current * oldMin)
+
+            # Update answer
+            answer = max(answer, maxProd)
+
+        return answer
