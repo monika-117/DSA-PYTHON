@@ -1,10 +1,28 @@
 class Solution:
     def thirdMax(self, nums):
-        nums = list(set(nums))   # Remove duplicates
+        first = None
+        second = None
+        third = None
 
-        nums.sort()              # Sort in ascending order
+        for num in nums:
 
-        if len(nums) < 3:
-            return nums[-1]      # Return largest element
+            # Skip duplicates
+            if num == first or num == second or num == third:
+                continue
 
-        return nums[-3]          # Return third largest
+            if first is None or num > first:
+                third = second
+                second = first
+                first = num
+
+            elif second is None or num > second:
+                third = second
+                second = num
+
+            elif third is None or num > third:
+                third = num
+
+        if third is None:
+            return first
+
+        return third
