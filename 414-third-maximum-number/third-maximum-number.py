@@ -24,5 +24,5 @@ class Solution:
 
         if third is None:
             return first
-
+            
         return third
