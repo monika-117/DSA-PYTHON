@@ -1,13 +1,12 @@
 class Solution:
-  def convert(self, s: str, numRows: int) -> str:
-    rows = [''] * numRows
-    k = 0
-    direction = (numRows == 1) - 1
+    def convert(self, s: str, numRows: int) -> str:
+        l = len(s)
+        o =''
+        step = max(1, 2*numRows - 2)
+        for i in range(numRows):
+            for j in range(i, l, step):
+                o += s[j]
+                if j+2*(numRows-i-1) < l and i != 0 and i != numRows-1:
+                    o += s[j+2*(numRows-i-1)]
 
-    for c in s:
-      rows[k] += c
-      if k == 0 or k == numRows - 1:
-        direction *= -1
-      k += direction
-
-    return ''.join(rows)
+        return o
