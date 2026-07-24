@@ -1,13 +1,12 @@
 class Solution:
-  def removeElements(self, head: ListNode, val: int) -> ListNode:
-    dummy = ListNode(0, head)
-    prev = dummy
+    def removeElements(self, head: Optional[ListNode], val: int) -> Optional[ListNode]:
+        dummy = ListNode(0, head)
+        curr = dummy
 
-    while head:
-      if head.val != val:
-        prev.next = head
-        prev = prev.next
-      head = head.next
-    prev.next = None
+        while curr.next:
+            if curr.next.val == val:
+                curr.next = curr.next.next
+                continue
+            curr = curr.next
 
-    return dummy.next
+        return dummy.next
