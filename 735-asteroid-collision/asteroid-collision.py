@@ -1,19 +1,19 @@
 class Solution:
-  def asteroidCollision(self, asteroids: list[int]) -> list[int]:
-    stack = []
+    def asteroidCollision(self, asteroids: List[int]) -> List[int]:
+        stack = []
 
-    for a in asteroids:
-      if a > 0:
-        stack.append(a)
-      else:  # a < 0
-        # Destroy the previous positive one(s).
-        while stack and stack[-1] > 0 and stack[-1] < -a:
-          stack.pop()
-        if not stack or stack[-1] < 0:
-          stack.append(a)
-        elif stack[-1] == -a:
-          stack.pop()  # Both asteroids explode.
-        else:  # stack[-1] > the current asteroid.
-          pass  # Destroy the current asteroid, so do nothing.
+        for i in range(len(asteroids)):
 
-    return stack
+            while stack and stack[-1] > 0 and asteroids[i] < 0:
+                if -asteroids[i] > stack[-1]:
+                    stack.pop()
+                    continue
+                elif stack[-1] == -asteroids[i]:
+                    stack.pop()
+                    break   
+                elif stack[-1] > -asteroids[i]:
+                    break        
+            else:
+                stack.append(asteroids[i])
+        return stack
+            
